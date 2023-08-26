@@ -16,8 +16,72 @@ if(!ENV_LOCAL){
     define('ACF_LITE' , true);
 }
 
+function sync_tracks(){
+    $title = $_GET['title'];
+    $artiste = $_GET['artiste'];
+    $artisteArray = [];
+    $artisteArray = explode(",", $artiste, -1);
+    $artistsObject = [];
+    $i= 0;
+
+    foreach ($artisteArray as $artistItem){
+
+        $artistsObject[$i] = (object) array('name' => $artistItem);
+        $i++;
+    }
+
+
+    $soundTrackSync = SoundtrackSearchTrack($title, $artiste);
+    $waitList = array();
+
+    $artistsObjectJson = strtolower(json_encode($artistsObject));
+
+    if(isset($soundTrackSync->data->search->edges) && $soundTrackSync->data->search->edges){
+        $datas = $soundTrackSync->data->search->edges;
+
+        foreach ($datas as $data){
+            $titleTrack = $data->node->name;
+            $idTrack = $data->node->id;
+            $artists = $data->node->artists;
+            $artistJson = strtolower(json_encode($artists));
+
+
+            if($artistJson == $artistsObjectJson && $titleTrack == $title && empty($waitList)){
+                $waitList['name'] = $titleTrack;
+                $waitList['artists'] = $artists;
+                $waitList['id'] = $idTrack;
+            }
+        }
+
+        if(empty($waitList)){
+            $related = true;
+            foreach ($datas as $data){
+                $titleTrack = $data->node->name;
+                $idTrack = $data->node->id;
+                $artists = $data->node->artists;
+                $artistJson = strtolower(json_encode($artists));
+
+
+                if(empty($waitList)){
+                    $waitList['name'] = $titleTrack;
+                    $waitList['artists'] = $artists;
+                    $waitList['id'] = $idTrack;
+                }
+            }
+        }
+    }
+
+    if($waitList){
+
+        var_dump($waitList['id']);
+        update_waitlist($waitList['id']);
+    }
+
+}
+
 require_once (__DIR__ . '/inc/datatypes.php');
 require_once (__DIR__ . '/inc/lib/spotify_api.php');
+require_once (__DIR__ . '/inc/lib/soundtrack_api.php');
 require_once (__DIR__ . '/inc/configuration.php');
 require_once (__DIR__ . '/inc/configuration_security.php');
 require_once (__DIR__ . '/inc/methods.php');

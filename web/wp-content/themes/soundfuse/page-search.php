@@ -28,14 +28,15 @@ if(isset($_GET['search']) && $_GET['search']){
             $trackName = $resultsSearchItem->name;
             $trackID = $resultsSearchItem->id;
 
-            //var_dump($resultsSearchItem->id);
     ?>
 
         <li id="<?= $trackID; ?>">
-            <a target="_blank" href="/play-music/?id=<?= $trackID; ?>">
+            <a target="_blank" href="/play-music/?title=<?= $trackName; ?>&artiste=<?php
+            foreach ($artistsTrack as $artistsTrackItem): echo $artistsTrackItem->name . ','; endforeach; ?>">
                 <img src="<?= $imageAlbumUrl; ?>" width="250px" alt="">
                 <span>
-                <?php foreach ($artistsTrack as $artistsTrackItem): echo $artistsTrackItem->name . ' ';  endforeach;?>- <?= $trackName; ?></span>
+                <?php foreach ($artistsTrack as $artistsTrackItem): echo $artistsTrackItem->name . ' ';  endforeach;?>- <?= $trackName; ?>
+                </span>
             </a>
         </li>
 
