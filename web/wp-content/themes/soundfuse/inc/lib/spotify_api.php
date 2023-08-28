@@ -1,5 +1,6 @@
 <?php
 //session_destroy();
+
 session_start();
 add_action( 'template_redirect','check_user_connected' );
 function check_user_connected() {
@@ -15,7 +16,7 @@ function check_user_connected() {
         $data = [
             'grant_type' => 'authorization_code',
             'code'       => $code,
-            'redirect_uri' => 'https://soundfuse.code/'
+            'redirect_uri' => get_site_url() . '/'
         ];
         $response = wp_remote_post($urlToken, array(
             'body' => $data,
@@ -55,6 +56,27 @@ function get_users_infos(){
 
 function get_users_playlist(){
     $url = 'https://api.spotify.com/v1/users/'. $_SESSION['user_id'] .'/playlists';
+
+    $response = wp_remote_get($url, array(
+        'body' => '',
+        'headers' => array(
+            'Authorization' => 'Bearer ' . $_SESSION['tokenUser'],
+        ),
+    ));
+
+    $responseBody = $response['body'];
+    $responseBodyFormated = json_decode($responseBody);
+
+    return $responseBodyFormated;
+}
+
+function get_playlist_current(){
+
+    $url = 'https://api.spotify.com/v1/playlists/'. $_GET['playlist_id'];
+
+    $datas = [
+        'fields'     => 'items(added_by.id,track(name,href,album(name,href)))'
+    ];
 
     $response = wp_remote_get($url, array(
         'body' => '',

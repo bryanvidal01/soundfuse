@@ -28,40 +28,92 @@ function example_callback() {
 
 add_action('wp_ajax_rgpd', 'rgpd_callback');
 add_action('wp_ajax_nopriv_rgpd', 'rgpd_callback');
-function rgpd_callback() {
-    // Security
-    checkNonce('securite_nonce_rgpd');
 
-    /**
-     * Si inexistante, on créée la table SQL "commissions" après l'activation du thème
-     */
-    global $wpdb;
-    $charset_collate = $wpdb->get_charset_collate();
 
-    $rgpd_table_name = $wpdb->prefix . 'rgpd';
+add_action( 'wp_ajax_nopriv_sync_tracks', 'sync_tracks' );
+add_action( 'wp_ajax_sync_tracks', 'sync_tracks' );
 
-    $create_table_rgpd_sql = "CREATE TABLE IF NOT EXISTS $rgpd_table_name (
-        id mediumint(9) NOT NULL AUTO_INCREMENT,
-        ip varchar(45) DEFAULT NULL,
-        time timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
-        PRIMARY KEY  (id)
-   ) $charset_collate;";
+function sync_tracks(){
+    $title = stripslashes($_POST['title']);
+    $artiste = stripslashes($_POST['artists']);
 
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-    dbDelta($create_table_rgpd_sql);
+    $artisteArray = [];
+    $artisteArray = explode(",", $artiste, -1);
+    $artistsObject = [];
+    $i= 0;
 
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } else {
-        $ip = $_SERVER['REMOTE_ADDR'];
+    foreach ($artisteArray as $artistItem){
+
+        $artistsObject[$i] = (object) array('name' => $artistItem);
+        $i++;
     }
 
-    $wpdb->get_results("INSERT INTO $rgpd_table_name (ip, time) VALUES ('$ip', (SELECT TIMESTAMP(\"YYYY-MM-DD\", \"HH:MM\")));");
 
-    $response['status'] = 200;
-    $response['message'] = "OK";
+    $soundTrackSync = SoundtrackSearchTrack($title, $artiste);
 
-    wp_send_json($response);
+    $waitList = array();
+
+    $artistsObjectJson = strtolower(json_encode($artistsObject));
+
+
+    if(isset($soundTrackSync->data->search->edges) && $soundTrackSync->data->search->edges){
+        $datas = $soundTrackSync->data->search->edges;
+
+        foreach ($datas as $data){
+            $titleTrack = $data->node->name;
+            $idTrack = $data->node->id;
+            $artists = $data->node->artists;
+            $artistJson = strtolower(json_encode($artists));
+            $market = $data->node->availableMarkets;
+
+            if($artistJson == $artistsObjectJson && $titleTrack == $title && empty($waitList) && !empty($market)){
+                $waitList['name'] = $titleTrack;
+                $waitList['artists'] = $artists;
+                $waitList['id'] = $idTrack;
+            }
+        }
+
+        if(empty($waitList)){
+            $related = true;
+            foreach ($datas as $data){
+                $titleTrack = $data->node->name;
+                $idTrack = $data->node->id;
+                $artists = $data->node->artists;
+                $artistJson = strtolower(json_encode($artists));
+                $market = $data->node->availableMarkets;
+
+                if(empty($waitList)){
+
+                    foreach ($artists as $artist){
+
+                        $NameArtist = $artist->name;
+
+                        foreach ($artisteArray as $artisteArraySearchItem){
+
+                            if(strtolower($NameArtist) == strtolower($artisteArraySearchItem) && empty($waitList) && !empty($market)){
+                                if(str_contains($titleTrack, $title) || str_contains($title, $titleTrack)){
+                                    $waitList['name'] = $titleTrack;
+                                    $waitList['artists'] = $artists;
+                                    $waitList['id'] = $idTrack;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+
+    if($waitList){
+        update_waitlist($waitList['id']);
+        $returnCode['status'] = 201;
+    }else{
+        $returnCode['status'] = 404;
+    }
+
+
+    wp_send_json($returnCode);
+
 }

@@ -5363,6 +5363,7 @@ body {
 .hero.search {
     position: fixed;
     width: 100%;
+    z-index: 30;
     left: 0;
     top: 0;
     background: #FFF;
@@ -5421,6 +5422,9 @@ body {
     overflow: auto;
     white-space: nowrap;
     padding-left: 20px;
+}
+.playlists a {
+    color: #676767;
 }
 .playlists li {
     white-space: nowrap;
@@ -5517,6 +5521,7 @@ body {
 .track-add .content-track-add {
     position: absolute;
     top: 50%;
+    width: 100%;
     transform: translateY(-50%);
     padding: 0 40px;
 }
@@ -5524,6 +5529,50 @@ body {
     display: block;
     margin: 0 auto 30px;
     width: 60px;
+}
+
+.container-img-playlist {
+    position: relative;
+    margin: 0 auto;
+    height: 50vh;
+    background-size: contain;
+    background-position: top left;
+    background-attachment: fixed;
+}
+.container-img-playlist:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, white 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.6) 100%);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.container-img-playlist img {
+    opacity: 0.4;
+}
+.container-img-playlist .container-info-playlist {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px;
+    left: 20px;
+    width: calc(100% - 40px);
+    z-index: 3;
+}
+.container-img-playlist .container-info-playlist p {
+    margin-bottom: 5px;
+}
+
+.list-tracks.playlist {
+    padding-top: 0;
+}
+
+.hero.playlist .t2 {
+    text-align: center;
+    margin-top: 8px;
+}
+.hero.playlist .icon-back {
+    margin-top: 5px;
 }
 
 /*# sourceMappingURL=app.css.map*/

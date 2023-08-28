@@ -1,11 +1,21 @@
 <?php
 /*
-Template Name: Recherche
+Template Name: Playlist
 */
 get_header();
 
-if(isset($_GET['search']) && $_GET['search']){
-    $resultsSearch = get_search_result();
+if(isset($_GET['playlist_id']) && $_GET['playlist_id']){
+    $playlistCurrent = get_playlist_current();
+
+    $tracks = $playlistCurrent->tracks;
+
+    //var_dump($tracks);
+    $images = $playlistCurrent->images;
+    $image = $images[0];
+    $imageUrl = $image->url;
+    $namePlaylist = $playlistCurrent->name;
+    $numberTracks = count($playlistCurrent->tracks->items);
+    $collaborative = $playlistCurrent->collaborative;
 }
 ?>
 
@@ -25,33 +35,46 @@ if(isset($_GET['search']) && $_GET['search']){
         </div>
     </div>
 </div>
-<div class="hero search">
+
+
+<div class="hero search playlist">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-2">
                 <a href="/">
                     <img src="<?= get_template_directory_uri(); ?>/assets/img/bg/back.png" class="icon-back" alt="">
                 </a>
-                <form action="/recherche" class="search-fixed">
-                    <input type="text" class="search-fixed-input" placeholder="<?= stripslashes($_GET['search']); ?>" name="search">
-                </form>
+            </div>
+            <div class="col-8 text-center">
+               <div class="t2">
+                   Ma playlist
+               </div>
             </div>
         </div>
     </div>
 </div>
 
-<ul class="list-tracks">
+<div class="container-img-playlist" style="background-image: url('<?= $imageUrl; ?>');">
+    <div class="container-info-playlist">
+        <p><?= ($collaborative) ? 'Playlist public' : 'Playlist privé'; ?></p>
+        <div class="t1">
+            <?= $namePlaylist; ?>
+        </div>
+        <p><?= $numberTracks; ?> titres</p>
+    </div>
+</div>
+
+<ul class="list-tracks playlist">
     <?php
         $i = 1;
-        foreach ($resultsSearch->tracks->items as $resultsSearchItem):
-
-            $imagesAlbumItem = $resultsSearchItem->album->images;
+        foreach ($tracks->items as $resultsSearchItem):
+            $imagesAlbumItem = $resultsSearchItem->track->album->images;
             $imageAlbum = reset($imagesAlbumItem);
             $imageAlbumUrl = $imageAlbum->url;
 
-            $artistsTrack = $resultsSearchItem->album->artists;
-            $trackName = $resultsSearchItem->name;
-            $trackID = $resultsSearchItem->id;
+            $artistsTrack = $resultsSearchItem->track->album->artists;
+            $trackName = $resultsSearchItem->track->name;
+            $trackID = $resultsSearchItem->track->id;
 
     ?>
 

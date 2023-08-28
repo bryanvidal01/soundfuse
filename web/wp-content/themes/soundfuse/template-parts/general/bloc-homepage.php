@@ -64,12 +64,14 @@ endif;
             ?>
 
             <li>
+                <a href="/playlist/?playlist_id=<?= $idPlaylist; ?>">
                 <div class="container-playlist">
                     <div class="container-image">
                         <img width="150px" src="<?= $imagePlaylistUrl; ?>" alt="">
                     </div>
                     <div class="name-playlist"><?= $titlePlaylist; ?></div>
                 </div>
+                </a>
             </li>
 
         <?php
