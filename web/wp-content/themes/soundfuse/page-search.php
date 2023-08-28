@@ -9,15 +9,33 @@ if(isset($_GET['search']) && $_GET['search']){
 }
 ?>
 
-<h2>Ajout d'un son</h2>
-<form action="/recherche">
-    <input type="text" name="search">
-    <button type="submit">Envoyer</button>
-</form>
-<hr/>
+<div class="on-load"></div>
+<div class="track-add">
+    <div class="content-track-add">
+        <div class="t1">
+            <img src="<?= get_template_directory_uri(); ?>/assets/img/bg/success.png" alt="">
+            Musique ajoutée à la liste
+        </div>
+    </div>
+</div>
+<div class="hero search">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <a href="/">
+                    <img src="<?= get_template_directory_uri(); ?>/assets/img/bg/back.png" class="icon-back" alt="">
+                </a>
+                <form action="/recherche" class="search-fixed">
+                    <input type="text" class="search-fixed-input" placeholder="<?= $_GET['search']; ?>" name="search">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-<ul>
+<ul class="list-tracks">
     <?php
+        $i = 1;
         foreach ($resultsSearch->tracks->items as $resultsSearchItem):
 
             $imagesAlbumItem = $resultsSearchItem->album->images;
@@ -33,15 +51,23 @@ if(isset($_GET['search']) && $_GET['search']){
         <li id="<?= $trackID; ?>">
             <a target="_blank" href="/play-music/?title=<?= $trackName; ?>&artiste=<?php
             foreach ($artistsTrack as $artistsTrackItem): echo $artistsTrackItem->name . ','; endforeach; ?>">
-                <img src="<?= $imageAlbumUrl; ?>" width="250px" alt="">
-                <span>
-                <?php foreach ($artistsTrack as $artistsTrackItem): echo $artistsTrackItem->name . ' ';  endforeach;?>- <?= $trackName; ?>
+                <span class="counter"><?= $i; ?></span>
+                <div class="container-image-list">
+                    <img src="<?= $imageAlbumUrl; ?>" width="250px" alt="">
+                </div>
+                <span class="track-info">
+                    <div class="title-track">
+                        <?= $trackName; ?>
+                    </div>
+                    <div class="track-author">
+                        <?php foreach ($artistsTrack as $artistsTrackItem): echo $artistsTrackItem->name . ' ';  endforeach;?>
+                    </div>
                 </span>
             </a>
         </li>
 
 
-    <?php endforeach; ?>
+    <?php $i++; endforeach; ?>
 </ul>
 
 

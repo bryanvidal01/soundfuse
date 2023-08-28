@@ -56,7 +56,24 @@
     <meta name="twitter:title" content="<?php wp_title(''); ?>">
     <meta name="twitter:description" content="<?php bloginfo('description'); ?>">
     <meta name="twitter:image" content="<?php echo get_template_directory_uri(); ?>/assets/img/twitter.jpg">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script
+            src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous"></script>
+    <style type="text/css">
+        @font-face {
+            font-family: 'mabry_proregular';
+            src: url('<?= get_template_directory_uri();?>/assets/fonts/mabrypro-regular-webfont.woff2') format('woff2'),
+            url('<?= get_template_directory_uri();?>/assets/fonts/mabrypro-regular-webfont.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+    </style>
+
     <?php wp_head(); ?>
 </head>
 
