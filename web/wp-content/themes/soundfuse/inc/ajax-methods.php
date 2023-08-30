@@ -38,7 +38,13 @@ function sync_tracks(){
     $artiste = stripslashes($_POST['artists']);
 
     $artisteArray = [];
-    $artisteArray = explode(",", $artiste, -1);
+    if(str_contains($artiste,',' )){
+        $artisteArray = explode(",", $artiste, -1);
+    }else{
+        $artisteArray = [$artiste];
+    }
+    
+
     $artistsObject = [];
     $i= 0;
 
@@ -50,6 +56,8 @@ function sync_tracks(){
 
 
     $soundTrackSync = SoundtrackSearchTrack($title, $artiste);
+
+    //var_dump($soundTrackSync);
 
     $waitList = array();
 
@@ -67,15 +75,23 @@ function sync_tracks(){
             $market = $data->node->availableMarkets;
 
             if($artistJson == $artistsObjectJson && $titleTrack == $title && empty($waitList) && !empty($market)){
-                $waitList['name'] = $titleTrack;
-                $waitList['artists'] = $artists;
-                $waitList['id'] = $idTrack;
+
+                foreach ($market as $marketItem){
+                    if($marketItem == 'FR'){
+                        $waitList['name'] = $titleTrack;
+                        $waitList['artists'] = $artists;
+                        $waitList['id'] = $idTrack;
+                    }
+                }
+
             }
+
         }
 
         if(empty($waitList)){
             $related = true;
             foreach ($datas as $data){
+
                 $titleTrack = $data->node->name;
                 $idTrack = $data->node->id;
                 $artists = $data->node->artists;
@@ -92,9 +108,13 @@ function sync_tracks(){
 
                             if(strtolower($NameArtist) == strtolower($artisteArraySearchItem) && empty($waitList) && !empty($market)){
                                 if(str_contains($titleTrack, $title) || str_contains($title, $titleTrack)){
-                                    $waitList['name'] = $titleTrack;
-                                    $waitList['artists'] = $artists;
-                                    $waitList['id'] = $idTrack;
+                                    foreach ($market as $marketItem){
+                                        if($marketItem == 'FR'){
+                                            $waitList['name'] = $titleTrack;
+                                            $waitList['artists'] = $artists;
+                                            $waitList['id'] = $idTrack;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -104,6 +124,7 @@ function sync_tracks(){
             }
         }
     }
+
 
 
     if($waitList){

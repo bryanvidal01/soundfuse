@@ -57,7 +57,13 @@ if(isset($_GET['search']) && $_GET['search']){
 
         <li id="<?= $trackID; ?>">
             <a target="_blank" href="<?php echo admin_url( 'admin-ajax.php' ); ?>" data-title="<?= $trackName; ?>" data-artists="<?php
-            foreach ($artistsTrack as $artistsTrackItem): echo $artistsTrackItem->name . ','; endforeach; ?>">
+            foreach ($artistsTrack as $artistsTrackItem):
+                if(count($artistsTrack) > 1){
+                    echo $artistsTrackItem->name . ',';
+                }else{
+                    echo $artistsTrackItem->name;
+                }
+            endforeach; ?>">
                 <span class="counter"><?= $i; ?></span>
                 <div class="container-image-list">
                     <img src="<?= $imageAlbumUrl; ?>" width="250px" alt="">
