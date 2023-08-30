@@ -43,7 +43,9 @@ function sync_tracks(){
     }else{
         $artisteArray = [$artiste];
     }
-    
+
+    //var_dump($artiste);
+    //var_dump($title);
 
     $artistsObject = [];
     $i= 0;
