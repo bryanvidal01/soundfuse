@@ -19,7 +19,9 @@ if(isset($_GET['playlist_id']) && $_GET['playlist_id']){
 }
 ?>
 
-<div class="on-load"></div>
+<div class="on-load">
+    <div class="loading"></div>
+</div>
 <div class="track-add success">
     <div class="content-track-add">
         <div class="t1">

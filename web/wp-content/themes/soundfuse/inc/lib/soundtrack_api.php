@@ -56,7 +56,7 @@
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS =>'{"query":"query search {\\n  search(query: \\"'. $title .' '. $artiste . '\\", type: track, market: FR, first: 800) {\\n    edges {\\n      node {\\n        ... on Track {\\n          id\\n          name\\n          availableMarkets\\n      artists {\\n            name\\n          }\\n        }\\n      }\\n    }\\n  }\\n}","variables":{}}',
+            CURLOPT_POSTFIELDS =>'{"query":"query search {\\n  search(query: \\"'. $title .' '. $artiste . '\\", type: track, market: FR, first: 200) {\\n    edges {\\n      node {\\n        ... on Track {\\n          id\\n          name\\n          artists {\\n            name\\n          }\\n        }\\n      }\\n    }\\n  }\\n}","variables":{}}',
             //CURLOPT_POSTFIELDS =>'{"query":"query search {\\n  search(query: \\"Man%20Down\\", type: track) {\\n    edges {\\n      node {\\n        ... on Track {\\n          id\\n          name\\n          artists {\\n            name\\n          }\\n        }\\n      }\\n    }\\n  }\\n}","variables":{}}',
             CURLOPT_HTTPHEADER => array(
                 'Authorization: Basic NVNyYVR6MVBxenVNNW0wQkFCOXAzMnpOYlZkUDk4Y046Q2ppaFd1Rk9ISEhXN00xSHAyN2VvTENUWG5nSUZJcnROZXhXS2J5VnZEVHNIM0JNUVhFVHFsQ0JkOWwxVWtlbw==',

@@ -44,8 +44,6 @@ function sync_tracks(){
         $artisteArray = [$artiste];
     }
 
-    //var_dump($artiste);
-    //var_dump($title);
 
     $artistsObject = [];
     $i= 0;
@@ -59,7 +57,6 @@ function sync_tracks(){
 
     $soundTrackSync = SoundtrackSearchTrack($title, $artiste);
 
-    //var_dump($soundTrackSync);
 
     $waitList = array();
 
@@ -74,18 +71,16 @@ function sync_tracks(){
             $idTrack = $data->node->id;
             $artists = $data->node->artists;
             $artistJson = strtolower(json_encode($artists));
-            $market = $data->node->availableMarkets;
 
-            if($artistJson == $artistsObjectJson && $titleTrack == $title && empty($waitList) && !empty($market)){
+            if($artistJson == $artistsObjectJson && $titleTrack == $title && empty($waitList)){
+                $waitList['name'] = $titleTrack;
+                $waitList['artists'] = $artists;
+                $waitList['id'] = $idTrack;
+                break;
+            }
 
-                foreach ($market as $marketItem){
-                    if($marketItem == 'FR'){
-                        $waitList['name'] = $titleTrack;
-                        $waitList['artists'] = $artists;
-                        $waitList['id'] = $idTrack;
-                    }
-                }
-
+            if($waitList){
+                break;
             }
 
         }
@@ -98,7 +93,7 @@ function sync_tracks(){
                 $idTrack = $data->node->id;
                 $artists = $data->node->artists;
                 $artistJson = strtolower(json_encode($artists));
-                $market = $data->node->availableMarkets;
+
 
                 if(empty($waitList)){
 
@@ -107,21 +102,21 @@ function sync_tracks(){
                         $NameArtist = $artist->name;
 
                         foreach ($artisteArray as $artisteArraySearchItem){
-
-                            if(strtolower($NameArtist) == strtolower($artisteArraySearchItem) && empty($waitList) && !empty($market)){
+                            if(strtolower($NameArtist) == strtolower($artisteArraySearchItem) && empty($waitList)){
                                 if(str_contains($titleTrack, $title) || str_contains($title, $titleTrack)){
-                                    foreach ($market as $marketItem){
-                                        if($marketItem == 'FR'){
-                                            $waitList['name'] = $titleTrack;
-                                            $waitList['artists'] = $artists;
-                                            $waitList['id'] = $idTrack;
-                                        }
-                                    }
+                                    $waitList['name'] = $titleTrack;
+                                    $waitList['artists'] = $artists;
+                                    $waitList['id'] = $idTrack;
+                                    break;
                                 }
                             }
                         }
 
                     }
+                }
+
+                if($waitList){
+                    break;
                 }
             }
         }
