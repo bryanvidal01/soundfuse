@@ -3,79 +3,321 @@ if($_SESSION["tokenUser"]):
     get_users_infos();
     $playlistUser = get_users_playlist();
 endif;
-?>
 
+//print_r($_SESSION)
+?>
 <div class="hero">
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-6 text-center">
                 <div class="t1">Mon profil</div>
             </div>
             <div class="col-6 text-right">
-                <div class="info-user">
-                    <div class="user-name"><?= $_SESSION['display_name']; ?></div>
-                    <div class="link-account">Mon compte</div>
-                </div>
-                <div class="img-user">
-                    <img src="<?= $_SESSION['user_image'][0]->url; ?>" alt="">
-                </div>
+                <a href="" class="button-follow account-modify-cta">
+                    Mon compte
+                </a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container-search-form">
+<div class="page-account visible">
+    <div class="container hero-user">
+        <div class="row">
+            <div class="col-12">
+                <div class="name-user">
+                    <?= $_SESSION['display_name']; ?>
+                </div>
+                <div class="classement">
+                    <img src="<?= get_template_directory_uri(); ?>/assets/img/v2/badge-100.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-user">
+        <div class="container-image-user">
+            <img src="<?= $_SESSION['user_image'][1]->url; ?>" alt="">
+        </div>
+        <div class="container-score-user">
+            <div class="container-followers">
+                <div class="content">
+                    <p>
+                        <strong>110</strong>
+                        abonnés
+                    </p>
+                    <p>
+                        <strong>120</strong>
+                        abonnement
+                    </p>
+                </div>
+            </div>
+            <div class="container-score">
+                <div class="content">
+                    <p>
+                        Score
+                        <strong>11230</strong>
+                    </p>
+                    <p>
+                        Participations
+                        <strong>120</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="intro-section">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="title-section">Abonnés</div>
+                        </div>
+                        <div class="col-4 text-right">
+                            <a href="">Voir tout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-abonned">
+        <ul>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="container-image">
+                    <img src="https://fakeimg.pl/50x50/" alt="">
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="intro-section">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="title-section">Dernières participations</div>
+                        </div>
+                        <div class="col-4 text-right">
+                            <a href="">Voir tout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container container-list-song">
+        <div class="row">
+            <div class="col-12">
+                <ul>
+                    <li class="row song-in-list">
+                        <div class="col-3">
+                            <div class="img-list">
+                                <img src="https://fakeimg.pl/90x90/" alt="">
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <p>
+                                <strong>
+                                    Perfect
+                                </strong>
+                                One direction
+                            </p>
+                        </div>
+                    </li>
+                    <li class="row song-in-list">
+                        <div class="col-3">
+                            <div class="img-list">
+                                <img src="https://fakeimg.pl/90x90/" alt="">
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <p>
+                                <strong>
+                                    Perfect
+                                </strong>
+                                One direction
+                            </p>
+                        </div>
+                    </li>
+                    <li class="row song-in-list">
+                        <div class="col-3">
+                            <div class="img-list">
+                                <img src="https://fakeimg.pl/90x90/" alt="">
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <p>
+                                <strong>
+                                    Perfect
+                                </strong>
+                                One direction
+                            </p>
+                        </div>
+                    </li>
+                    <li class="row song-in-list">
+                        <div class="col-3">
+                            <div class="img-list">
+                                <img src="https://fakeimg.pl/90x90/" alt="">
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <p>
+                                <strong>
+                                    Perfect
+                                </strong>
+                                One direction
+                            </p>
+                        </div>
+                    </li><li class="row song-in-list">
+                        <div class="col-3">
+                            <div class="img-list">
+                                <img src="https://fakeimg.pl/90x90/" alt="">
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <p>
+                                <strong>
+                                    Perfect
+                                </strong>
+                                One direction
+                            </p>
+                        </div>
+                    </li>
+                    <li class="row song-in-list">
+                        <div class="col-3">
+                            <div class="img-list">
+                                <img src="https://fakeimg.pl/90x90/" alt="">
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <p>
+                                <strong>
+                                    Perfect
+                                </strong>
+                                One direction
+                            </p>
+                        </div>
+                    </li>
+                    <li class="row song-in-list">
+                        <div class="col-3">
+                            <div class="img-list">
+                                <img src="https://fakeimg.pl/90x90/" alt="">
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <p>
+                                <strong>
+                                    Perfect
+                                </strong>
+                                One direction
+                            </p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modify-account hide">
+    <div class="container-image">
+        <img src="<?= $_SESSION['user_image'][1]->url; ?>" alt="">
+        <div class="modify-image">
+            <div class="modify-image-link">
+                Modifier ma photo
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="t2">Devenez le DJ de la soirée</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                <form action="/recherche">
-                    <input type="text" placeholder="Que souhaitez-vous écouter ?" name="search">
-                    <button type="submit">C'est parti !</button>
+                <form action="" class="modify-account-form">
+                    <label for="">
+                        Changer le nom d'utilisateur
+                        <input type="text" class="border-b-only" value="<?= $_SESSION['display_name']; ?>">
+                    </label>
+                    <button type="submit">Apporter les modifications</button>
                 </form>
             </div>
         </div>
     </div>
-</div>
-
-<div class="container-playlist">
     <div class="container">
-        <div class="col-12">
-            <div class="t2">Mes playlsits Spotify</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, animi dolorem est eum ex illum nemo nostrum provident qui quis ratione</p>
+        <div class="row">
+            <div class="col-12">
+                <div class="t1">
+                    Confidentialité
+                </div>
+                <p>
+                    Un compte public permet aux autres
+                    de suivre votre compte ainsi que vos activitées
+                </p>
+                <div class="form-group">
+                    <input type="checkbox" id="html">
+                    <label for="html">Mode privé</label>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<ul class="playlists">
-    <?php
-    if(isset($playlistUser->items) && $playlistUser->items):
-        foreach ($playlistUser->items as $playlistUserItem):
-
-            $imagesPlaylist = $playlistUserItem->images;
-            $imagePlaylist = reset($imagesPlaylist);
-
-            $imagePlaylistUrl = $imagePlaylist->url;
-
-            $idPlaylist = $playlistUserItem->id;
-
-            $titlePlaylist = $playlistUserItem->name;
-            ?>
-
-            <li>
-                <a href="/playlist/?playlist_id=<?= $idPlaylist; ?>">
-                <div class="container-playlist">
-                    <div class="container-image">
-                        <img width="150px" src="<?= $imagePlaylistUrl; ?>" alt="">
-                    </div>
-                    <div class="name-playlist"><?= $titlePlaylist; ?></div>
-                </div>
-                </a>
-            </li>
-
-        <?php
-        endforeach;
-    endif;
-    ?>
-</ul>

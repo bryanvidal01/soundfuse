@@ -21,7 +21,7 @@
     <link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/assets/favicon/site.webmanifest" crossorigin="use-credentials">
     <link rel="mask-icon" href="<?php echo get_template_directory_uri(); ?>/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#161616">
     <!-- Apple Mobile -->
     <link rel="apple-touch-icon-precomposed" href="">
     <link rel="apple-touch-startup-image" href="<?php echo get_template_directory_uri(); ?>/assets/favicon/startup.png">
@@ -78,4 +78,27 @@
 </head>
 
 <body <?php body_class(); ?> data-module="bugReport">
+
+<div class="header navigation">
+    <ul>
+        <li>
+            <a href="">
+                <img src="<?= get_template_directory_uri(); ?>/assets/img/v2/menu/user.svg" alt="">
+                <span>Mon compte</span>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <img src="<?= get_template_directory_uri(); ?>/assets/img/v2/menu/participer.svg" alt="">
+                <span>Participer</span>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <img src="<?= get_template_directory_uri(); ?>/assets/img/v2/menu/reglages.svg" alt="">
+                <span>Réglages</span>
+            </a>
+        </li>
+    </ul>
+</div>
 

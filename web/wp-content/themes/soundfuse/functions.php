@@ -47,7 +47,7 @@ function scripts_site(){
 
         // Script
         //wp_enqueue_script('script-js', get_template_directory_uri() . '/assets/js/app.js', array(), filemtime(get_template_directory() . '/assets/js/app.js'), true);
-        wp_enqueue_script('script-js', get_template_directory_uri() . '/assets/script.js', array(), filemtime(get_template_directory() . '/assets/script.js'), true);
+        wp_enqueue_script('script-js', get_template_directory_uri() . '/script.js', array(), filemtime(get_template_directory() . '/assets/script.js'), true);
 
         // Script à injecter exemple :
         // if (is_front_page()) {

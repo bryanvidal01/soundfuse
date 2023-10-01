@@ -1,6 +1,6 @@
 .t1{
-  font-size: 29px;
-  line-height: 29px;
+  font-size: 26px;
+  line-height: 28px;
   margin-bottom: 10px;
 }
 .t2{
@@ -10,30 +10,80 @@
 }
 
 p{
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  color: #676767;
+  font-size: 14px;
+  color: rgba(#FFF, .5);
   margin-top: 0;
 }
 
+a{
+  color: #FFF;
+  font-size: 14px;
+}
+
 .container{
-  padding: 20px;
+  padding: 15px;
 }
 
 .icon-back{
   margin-top: 10px;
   width: 30px;
 }
+
+label{
+  font-size: 14px;
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+form.login{
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(#FFF, .2);
+}
+
+.container-login-extern{
+  border-bottom: 1px solid rgba(#FFF, .2);
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.no-account{
+  padding-top: 30px;
+  p{
+    font-family: 'mabry_proregular';
+  }
+  
+  a{
+    font-family: 'mabry_proregular';
+    color: #FFF;
+    font-size: 16px;
+    text-decoration: underline;
+  }
+}
+
 input{
   appearance: none;
   -webkit-appearance: none;
   width: 100%;
-  padding: 15px;
-  border: 1px solid #BFBFBF;
-  border-radius: 8px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+  padding: 12px 13px 13px;
+  border: 1px solid rgba(#FFF, .45);
+  border-radius: 3px;
+  background: transparent;
+  font-family: "mabry_proregular", sans-serif;
+  font-size: 14px;
   margin-bottom: 15px;
+  transition: .3s;
+  color: #FFF;
+
+  &:focus{
+    border: 1px solid rgba(#FFF, 1);
+    background: transparent;
+  }
+
+  &:invalid{
+    border-color: #CD2D2D;
+    background: transparent;
+  }
 
   &.search-fixed-input{
     border-radius: 80px;
@@ -44,47 +94,56 @@ input{
 
 button[type="submit"]{
   width: 100%;
-  padding: 13px 0 18px;
+  padding: 12px 0 14px;
   appearance: none;
   -webkit-appearance: none;
-  font-size: 19px;
+  font-size: 16px;
+  font-weight: 700;
   border: 0;
   border-radius: 30px;
-  background: #194E64;
-  color: #FFF;
+  background: #FFF;
+  color: #000;
   font-family: 'mabry_proregular';
   margin-top: 15px;
 }
 
 .button{
   width: 100%;
-  padding: 15px 0 15px;
-  font-size: 19px;
-  border: 0;
+  padding: 12px 0 12px;
+  font-size: 16px;
+  font-weight: 500;
   border-radius: 30px;
   color: #FFF;
   font-family: 'mabry_proregular';
   margin-top: 15px;
   text-align: center;
   display: block;
-  background: #BEBEBE;
+  background: transparent;
+  border: 1px solid #FFF;
 
-  &.spotify{
-    background: #44B354;
+  &.spotify, &.deezer{
 
     span{
       position: relative;
 
       &:before{
         content: '';
-        width: 25px;
-        height: 25px;
+        width: 23px;
+        height: 23px;
         vertical-align: middle;
         margin-left: -40px;
-        background: url("../img/icon-spotify.png");
+        background: url("../img/v2/spotify.svg");
         position: absolute;
         background-size: 100%;
         margin-right: 100%;
+      }
+    }
+  }
+
+  &.deezer{
+    span{
+      &:before{
+        background-image: url("../img/v2/deezer.svg");
       }
     }
   }
@@ -92,4 +151,50 @@ button[type="submit"]{
 
 .text-right{
   text-align: right;
+}
+
+.header{
+  position: fixed;
+  bottom: 0;
+  z-index: 300;
+  width: 100%;
+  padding: 8px;
+  padding-bottom: 40px;
+  border-top: 1px solid #494949;
+  background: #1B1B1B;
+
+  &:before{
+    content: '';
+    width: 100%;
+    height: 5vh;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.3) 100%);
+    pointer-events: none;
+  }
+
+  ul{
+    display: flex;
+    flex-direction: row;
+
+    li{
+      flex: auto;
+      text-align: center;
+
+      a{
+        color: #FFF;
+        font-size: 13px;
+
+        span{
+          margin-top: 3px;
+          display: block;
+        }
+      }
+      img{
+        display: inline-block;
+        opacity: .85;
+      }
+    }
+  }
 }
