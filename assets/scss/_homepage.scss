@@ -517,6 +517,120 @@ body{
   }
 }
 
+.geolocation{
+  position: fixed;
+  top: 50%;
+  width: 100%;
+  left: 0;
+  transform: translateY(-50%);
+
+  .loader-location{
+    margin: 0 auto;
+    width: 10%;
+    position: relative;
+
+    img{
+      width: 100%;
+    }
+
+    &:before{
+      content: '';
+      width: 100%;
+      background: rgba(#161616, .8);
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      animation: loader 1s ease-in-out infinite;
+    }
+  }
+  .text-loader{
+    text-align: center;
+    font-size: 14px;
+    margin-top: 20px;
+  }
+}
+
+
+.vue-bar{
+  .image-bar{
+    width: 50vw;
+    height: 50vw;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    .background-bar{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .8;
+    }
+
+    .logo-bar{
+      width: 30vw;
+      height: 30vw;
+      overflow: hidden;
+      border-radius: 50%;
+      margin: 0 auto;
+      position: absolute;
+      top: 10vw;
+      left: 10vw;
+
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .info-bar{
+    margin-top: 20px;
+    text-align: center;
+    border-bottom: 1px solid #494949;
+    padding-bottom: 30px;
+    p{
+      margin-bottom: 0;
+    }
+
+    .button{
+      margin-top: 25px;
+    }
+    .t1{
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.container-qr-code{
+  padding-top: 25px;
+
+  .t2{
+    margin-bottom: 20px;
+  }
+  .img-qrcode{
+    width: 100%;
+  }
+  p{
+    margin-bottom: 0;
+  }
+  .link{
+    text-decoration: underline;
+  }
+}
+
+@keyframes loader {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

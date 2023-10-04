@@ -1,3 +1,33 @@
+$('.navigation a').click(function(event){
+    event.preventDefault()
+    var el = $(this);
+    var link = el.attr('href');
+
+    $('.page').fadeOut();
+
+    $(link).fadeIn();
+
+    if(link == '#participer'){
+        $('.vue-bar').addClass('hide');
+        $('.vue-geolocation').removeClass('hide');
+
+        setTimeout(function(){
+           $('.vue-bar').removeClass('hide');
+           $('.vue-geolocation').addClass('hide');
+        },3000);
+    }
+});
+
+const successCallback = (position) => {
+    console.log(position);
+};
+
+const errorCallback = (error) => {
+    console.log(error);
+};
+
+navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
 
 $('.container-password img').click(function(){
    var el = $(this);
@@ -26,6 +56,8 @@ $('.account-modify-cta').click(function(event){
         $('.page-account').addClass('visible');
     }
 });
+
+// Header Nav
 
 $('.list-tracks a').click(function(event){
 

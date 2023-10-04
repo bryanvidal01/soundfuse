@@ -91,7 +91,9 @@ input{
     margin-bottom: 0;
   }
 }
-
+.text-center{
+  text-align: center;
+}
 button[type="submit"]{
   width: 100%;
   padding: 12px 0 14px;
@@ -120,6 +122,12 @@ button[type="submit"]{
   display: block;
   background: transparent;
   border: 1px solid #FFF;
+
+  &.white{
+    background-color: #fff;
+    color: #161616;
+    font-weight: 600;
+  }
 
   &.spotify, &.deezer{
 
